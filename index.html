@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#050507">
+<meta name="description" content="Shell Roulette — trò chơi roulette shotgun 2 người chơi trên một thiết bị, chạy trên trình duyệt.">
+<title>Shell Roulette — 2 người chơi</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="stage" aria-label="Bàn chơi 3D"></canvas>
+
+<!-- HUD trong ván -->
+<div id="hud" class="hidden">
+  <div id="topbar">
+    <div class="pl" id="pl0"><div class="nm"></div><div class="cells"></div><div class="tags"></div></div>
+    <div id="mid"><div id="roundtxt"></div><div id="score"></div></div>
+    <div class="pl right" id="pl1"><div class="nm"></div><div class="cells"></div><div class="tags"></div></div>
+  </div>
+  <div id="tools">
+    <button class="tool" id="t-sound" title="Âm thanh (M)" aria-label="Bật/tắt âm thanh">ÂM</button>
+    <button class="tool" id="t-music" title="Nhạc nền" aria-label="Bật/tắt nhạc nền">NHẠC</button>
+    <button class="tool" id="t-counter" title="Bộ đếm đạn" aria-label="Bật/tắt bộ đếm đạn">ĐẾM</button>
+    <button class="tool" id="t-help" title="Cách chơi (H)" aria-label="Cách chơi">?</button>
+  </div>
+  <div id="counter"></div>
+  <div id="banner" aria-live="polite"></div>
+  <div id="log"></div>
+  <div id="actions"></div>
+</div>
+
+<!-- Màn hình bắt đầu -->
+<div id="screen-start" class="screen">
+  <div class="card">
+    <h1>SHELL<br>ROULETTE</h1>
+    <p class="sub">Trò chơi sinh tồn 2 người, cùng nhìn một màn hình.<br>Một khẩu shotgun. Đạn thật và đạn lép trộn ngẫu nhiên.</p>
+    <label class="field"><span>Người chơi 1</span><input id="in-name0" maxlength="12" autocomplete="off"></label>
+    <label class="field"><span>Người chơi 2</span><input id="in-name1" maxlength="12" autocomplete="off"></label>
+    <label class="check"><input type="checkbox" id="in-counter"><span>Hiện bộ đếm đạn còn lại</span></label>
+    <div class="row">
+      <button class="btn primary" id="btn-start">BẮT ĐẦU</button>
+      <button class="btn" id="btn-help0">CÁCH CHƠI</button>
+    </div>
+    <p class="fine">Mọi mô hình, hình ảnh và âm thanh đều được tạo bằng code. Không dùng tài nguyên của trò chơi nào khác.</p>
+  </div>
+</div>
+
+<!-- Cách chơi -->
+<div id="screen-help" class="screen hidden">
+  <div class="card wide">
+    <h2>CÁCH CHƠI</h2>
+    <div class="scroll" id="help-body"></div>
+    <div class="row"><button class="btn primary" id="btn-help-close">ĐÓNG</button></div>
+  </div>
+</div>
+
+<!-- Thông tin riêng (kính lúp / điện thoại) -->
+<div id="screen-peek" class="screen solid hidden">
+  <div class="card">
+    <p class="sub"><b id="peek-name"></b> XEM · <b id="peek-other"></b> HÃY NHẮM MẮT</p>
+    <h2 id="peek-title"></h2>
+    <div id="peek-box" tabindex="0" role="button" aria-label="Nhấn giữ để xem"><span id="peek-hint">NHẤN GIỮ ĐỂ XEM</span><span id="peek-result"></span></div>
+    <div class="row"><button class="btn primary" id="btn-peek-done">XONG</button></div>
+  </div>
+</div>
+
+<!-- Kết thúc hiệp / trận -->
+<div id="screen-round" class="screen hidden">
+  <div class="card">
+    <h2 id="round-title"></h2>
+    <p class="sub" id="round-sub"></p>
+    <div class="row">
+      <button class="btn primary" id="btn-round-next">HIỆP TIẾP THEO</button>
+      <button class="btn" id="btn-round-menu">VỀ MENU</button>
+    </div>
+  </div>
+</div>
+
+<!-- Không hỗ trợ WebGL -->
+<div id="screen-nogl" class="screen solid hidden">
+  <div class="card">
+    <h2>KHÔNG CHẠY ĐƯỢC</h2>
+    <p class="sub">Trình duyệt của bạn không hỗ trợ WebGL hoặc đã tắt tăng tốc phần cứng.<br>Hãy thử Chrome, Edge, Firefox hoặc Safari bản mới.</p>
+  </div>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="js/logic.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>
